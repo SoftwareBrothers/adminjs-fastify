@@ -1,12 +1,22 @@
-import express from 'express';
+import fastify from 'fastify';
 import setupAdmin from './admin/admin';
+import mongoose from 'mongoose';
 
-const app = express();
+const app = fastify();
 const port = 3000;
 
 const run = async (): Promise<void> => {
-  await setupAdmin(app);
-  app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+  try {
+    await mongoose.connect('mongodb://localhost/fastify', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    await setupAdmin(app);
+    await app.listen(port);
+  } catch (err) {
+    app.log.error(err);
+    process.exit(1);
+  }
 };
 
 run();

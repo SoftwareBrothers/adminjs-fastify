@@ -9,13 +9,11 @@
   },
   "dependencies": {
     "@admin-bro/design-system": "^1.7.0",
-    "admin-bro-expressjs": "^2.1.1",
-    "express": "^4.17.1",
-    "express-formidable": "^1.2.0",
+    "@admin-bro/mongoose": "^1.1.0",
+    "@softwarebrothers/admin-js-fastify": "../",
+    "mongoose": "^5.12.14",
     "nodemon": "^2.0.6",
     "ts-node": "^9.0.0"
   },
-  "devDependencies": {
-    "@types/express": "^4.17.8"
-  }
+  "devDependencies": {}
 }

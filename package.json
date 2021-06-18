@@ -26,7 +26,9 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@semantic-release/git": "^9.0.0",
+    "@types/busboy": "^0.2.3",
     "@types/jest": "^26.0.15",
+    "@types/node": "^15.12.2",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
     "admin-bro": "^3.3.1",
@@ -43,5 +45,12 @@
     "ts-jest": "^26.4.3",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.5"
+  },
+  "dependencies": {
+    "fastify": "^3.18.0",
+    "fastify-cookie": "^5.3.1",
+    "fastify-multipart": "^4.0.6",
+    "fastify-session": "^5.2.1",
+    "lodash": "^4.17.21"
   }
 }

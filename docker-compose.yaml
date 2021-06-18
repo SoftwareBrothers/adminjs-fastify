@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  db:
+    image: mongo:latest
+    container_name: fastify-db
+    restart: always
+    volumes:
+      - ./docker/db:/data/db
+    ports:
+      - 27017:27017

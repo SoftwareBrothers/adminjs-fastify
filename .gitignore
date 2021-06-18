@@ -123,5 +123,5 @@ dist
 /build
 /lib
 /types
-.adminbro
-example/.adminbro
+.AdminJS
+example/.AdminJS

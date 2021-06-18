@@ -1,21 +1,21 @@
-# Feature for AdminBro
+# Feature for AdminJS
 
 This is feature template.
 
-## AdminBro
+## AdminJS
 
-AdminBro is an automatic admin interface which can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminBro generates UI which allows you (or other trusted users) to manage content.
+AdminJS is an automatic admin interface which can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminJS generates UI which allows you (or other trusted users) to manage content.
 
 Check out the example application with mongo and postgres models here: https://admin-bro-example-app-staging.herokuapp.com/admin
 
-Or visit [AdminBro](https://github.com/SoftwareBrothers/admin-bro) github page.
+Or visit [AdminJS](https://github.com/SoftwareBrothers/admin-bro) github page.
 
 ## Usage
 
 
 ## License
 
-AdminBro is Copyright © 2020 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
+AdminJS is Copyright © 2020 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
 
 ## About SoftwareBrothers.co
 

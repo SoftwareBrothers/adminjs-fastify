@@ -1,17 +1,17 @@
-import AdminBroExpress from 'admin-bro-expressjs';
+import AdminJSFastify from '@softwarebrothers/admin-js-fastify';
 import MongooseAdapter from '@admin-bro/mongoose';
-import AdminBro from 'admin-bro';
-import { Express } from 'express';
+import AdminJS from 'admin-bro';
 import { createUserResource } from './resources/user/user.resource';
+import { FastifyInstance } from 'fastify';
 
-const setupAdmin = async (app: Express): Promise<void> => {
-  AdminBro.registerAdapter(MongooseAdapter);
-  const adminBro = new AdminBro({
+const setupAdmin = async (app: FastifyInstance): Promise<void> => {
+  AdminJS.registerAdapter(MongooseAdapter);
+  const admin = new AdminJS({
+    rootPath: '/admin',
     resources: [createUserResource()],
   });
 
-  const router = await AdminBroExpress.buildRouter(adminBro);
-  app.use(adminBro.options.rootPath, router);
+  await AdminJSFastify.buildRouter(admin, app);
 };
 
 export default setupAdmin;
