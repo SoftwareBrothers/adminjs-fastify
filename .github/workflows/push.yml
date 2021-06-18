@@ -1,0 +1,60 @@
+name: CI/CD
+on: push
+env:
+  SLACK_WEBHOOK: ${{ secrets.ADMIN_SLACK_WEBHOOK }}
+  NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Lint
+        run: yarn lint
+      - name: Build
+        run: yarn build
+      - name: Test
+        run: yarn test
+      - name: Authenticate with NPM Token
+        run: yarn config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
+#      - name: Release
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.ADMIN_SLACK_WEBHOOK }}
+#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: yarn release
+
+  notify:
+    name: Notify
+    runs-on: ubuntu-latest
+    if: failure()
+    needs:
+      - test
+    steps:
+      - uses: technote-space/workflow-conclusion-action@v1
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ env.WORKFLOW_CONCLUSION }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        if: always()
