@@ -12,7 +12,7 @@ import FastifySessionPlugin from 'fastify-session';
 import Options = FastifySessionPlugin.Options;
 /**
  * @typedef {Function} Authenticate
- * @memberof module:@admin-bro/express
+ * @memberof module:@adminjs/fastify
  * @description
  * function taking 2 arguments email and password
  * @param {string} [email]         email given in the form
@@ -23,12 +23,11 @@ import Options = FastifySessionPlugin.Options;
 /**
  * Builds the Express Router which is protected by a session auth
  *
- * Using the router requires you to install `express-session` as a
- * dependency. Normally express-session holds session in memory, which is
+ * Normally fastify-session holds session in memory, which is
  * not optimized for production usage and, in development, it causes
  * logging out after every page refresh (if you use nodemon).
  * @static
- * @memberof module:@admin-bro/express
+ * @memberof module:@adminjs/fastify
  * @example
  * const ADMIN = {
  *   email: 'test@example.com',
