@@ -15,7 +15,17 @@
     "baseUrl": "./",
     "outDir": "lib",
     "declarationDir": "types",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "admin-js": [
+        "admin-bro"
+      ]
+    }
   },
-  "exclude": ["test", "lib", "types", "example"]
+  "exclude": [
+    "test",
+    "lib",
+    "types",
+    "example"
+  ]
 }
