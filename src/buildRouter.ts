@@ -4,21 +4,26 @@ import { WrongArgumentError } from './errors';
 import { log } from './logger';
 import { FastifyInstance } from 'fastify';
 import { RouteHandlerMethod } from 'fastify/types/route';
-import fastifySession from 'fastify-session';
-import fastifyCookie from 'fastify-cookie';
 import { fromPairs } from 'lodash';
 import * as fs from 'fs';
 
 import fastifyMultipart from 'fastify-multipart';
 
-import { pipeline } from 'stream';
-
-import util from 'util';
-
-const pump = util.promisify(pipeline);
-
 const INVALID_ADMIN_BRO_INSTANCE =
   'You have to pass an instance of AdminJS to the buildRouter() function';
+
+const getFile = (fileField?: {
+  fieldname: string;
+  filename: string;
+  file: Record<string, unknown>;
+}) => {
+  if (!fileField?.file) {
+    return null;
+  }
+  const { file, filename } = fileField;
+  file.name = filename;
+  return file;
+};
 
 export const buildRouter = (
   admin: AdminJS,
@@ -27,12 +32,7 @@ export const buildRouter = (
   if (admin?.constructor?.name !== 'AdminBro') {
     throw new WrongArgumentError(INVALID_ADMIN_BRO_INSTANCE);
   }
-
   fastifyApp.register(fastifyMultipart, { attachFieldsToBody: true });
-  fastifyApp.register(fastifyCookie);
-  fastifyApp.register(fastifySession, {
-    secret: 'a secret with minimum length of 32 characters',
-  });
 
   admin.initialize().then(() => {
     log.debug('AdminJS: bundle ready');
@@ -47,28 +47,27 @@ export const buildRouter = (
     const handler: RouteHandlerMethod = async (request, reply) => {
       const controller = new route.Controller(
         { admin },
-        request.session && request.session.adminUser
+        request.session?.adminUser
       );
       const { params, query } = request;
       const method = request.method.toLowerCase();
 
-      const body = request.body as Record<string, { value: string }>;
+      const body = request.body as Record<
+        string,
+        { value: string; file?: File }
+      >;
       const fields = fromPairs(
         Object.keys((body ?? {}) as Record<string, unknown>).map(key => [
           key,
-          body[key].value,
+          getFile(body[key] as any) ?? body[key].value,
         ])
       );
-      const payload = {
-        ...(fields || {}),
-        // ...(request.files || {}),
-      };
       const html = await controller[route.action](
         {
           ...request,
           params,
           query,
-          payload,
+          payload: fields ?? {},
           method,
         },
         reply
@@ -96,8 +95,8 @@ export const buildRouter = (
   assets.forEach(asset => {
     fastifyApp.get(
       `${admin.options.rootPath}${asset.path}`,
-      async (req, res) => {
-        res.send(fs.createReadStream(path.resolve(asset.src)));
+      async (req, reply) => {
+        reply.send(fs.createReadStream(path.resolve(asset.src)));
       }
     );
   });

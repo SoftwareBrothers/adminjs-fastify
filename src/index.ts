@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 // import { buildAuthenticatedRouter } from './buildAuthenticatedRouter';
 import { buildRouter } from './buildRouter';
+import { buildAuthenticatedRouter } from './buildAuthenticatedRouter';
 
 /**
  * @module @admin-bro/express
@@ -98,8 +99,8 @@ import { buildRouter } from './buildRouter';
  */
 export const name = 'AdminJSFastify';
 
-module.exports = { name, buildRouter };
+module.exports = { name, buildRouter, buildAuthenticatedRouter };
 
-export default { name, buildRouter };
+export default { name, buildRouter, buildAuthenticatedRouter };
 
-export { AuthenticationOptions, FormidableOptions } from './types';
+export { AuthenticationOptions } from './types';

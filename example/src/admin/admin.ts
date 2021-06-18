@@ -11,7 +11,19 @@ const setupAdmin = async (app: FastifyInstance): Promise<void> => {
     resources: [createUserResource()],
   });
 
-  await AdminJSFastify.buildRouter(admin, app);
+  await AdminJSFastify.buildRouter(
+    admin,
+    // {
+    //   cookiePassword: 'secretsecretsecretsecretsecretsecretsecretsecret',
+    //   authenticate: () => {
+    //     return {
+    //       id: 1,
+    //       email: 'Admin',
+    //     };
+    //   },
+    // },
+    app
+  );
 };
 
 export default setupAdmin;
