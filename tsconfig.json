@@ -16,6 +16,7 @@
     "outDir": "lib",
     "declarationDir": "types",
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "paths": {
       "adminjs": [
         "admin-bro"
