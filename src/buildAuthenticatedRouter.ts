@@ -1,4 +1,4 @@
-import AdminJS from 'admin-bro';
+import AdminJS from 'adminjs';
 import { withLogout } from './authentication/logout.handler';
 import { buildRouter } from './buildRouter';
 import { AuthenticationOptions } from './types';

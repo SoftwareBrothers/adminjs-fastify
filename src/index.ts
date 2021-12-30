@@ -38,7 +38,7 @@ import { buildAuthenticatedRouter } from './buildAuthenticatedRouter';
  * ## Example without an authentication
  *
  * ```
- * const AdminJS = require('admin-bro')
+ * const AdminJS = require('adminjs')
  * const AdminJSFastify = require('@adminjs/fastify')
  *
  * const fastify = require('fastify')()

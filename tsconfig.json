@@ -17,7 +17,7 @@
     "declarationDir": "types",
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "admin-js": [
+      "adminjs": [
         "admin-bro"
       ]
     }

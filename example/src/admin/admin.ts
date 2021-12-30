@@ -1,6 +1,6 @@
-import AdminJSFastify from '@softwarebrothers/admin-js-fastify';
-import MongooseAdapter from '@admin-bro/mongoose';
-import AdminJS from 'admin-bro';
+import AdminJSFastify from '@adminjs/fastify';
+import MongooseAdapter from '@adminjs/mongoose';
+import AdminJS from 'adminjs';
 import { createUserResource } from './resources/user/user.resource';
 import { FastifyInstance } from 'fastify';
 

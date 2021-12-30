@@ -1,4 +1,4 @@
-import AdminJS, { Router as AdminRouter } from 'admin-bro';
+import AdminJS, { Router as AdminRouter } from 'adminjs';
 import { FastifyInstance } from 'fastify';
 
 export const withProtectedRoutesHandler = (

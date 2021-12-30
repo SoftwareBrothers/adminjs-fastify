@@ -123,5 +123,6 @@ dist
 /build
 /lib
 /types
-.AdminJS
-example/.AdminJS
+.adminjs
+example/.adminjs
+.husky

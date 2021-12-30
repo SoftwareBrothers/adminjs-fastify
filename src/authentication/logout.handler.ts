@@ -1,4 +1,4 @@
-import AdminJS from 'admin-bro';
+import AdminJS from 'adminjs';
 import { FastifyInstance } from 'fastify';
 
 const getLogoutPath = (admin: AdminJS) => {

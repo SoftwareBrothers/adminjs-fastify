@@ -1,4 +1,4 @@
-import AdminJS from 'admin-bro';
+import AdminJS from 'adminjs';
 import { AuthenticationOptions } from '../types';
 import { FastifyInstance } from 'fastify';
 

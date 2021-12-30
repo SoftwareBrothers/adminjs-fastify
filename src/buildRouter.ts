@@ -1,4 +1,4 @@
-import AdminJS, { Router as AdminRouter } from 'admin-bro';
+import AdminJS, { Router as AdminRouter } from 'adminjs';
 import path from 'path';
 import { WrongArgumentError } from './errors';
 import { log } from './logger';

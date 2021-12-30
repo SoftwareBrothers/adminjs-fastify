@@ -1,6 +1,6 @@
-# Feature for AdminJS
+# Fastify plugin for AdminJS
 
-This is feature template.
+This is an official [AdminJS](https://github.com/SoftwareBrothers/adminjs) plugin which integrates it with [Fastify](https://www.fastify.io/) framework.
 
 ## AdminJS
 
@@ -8,14 +8,15 @@ AdminJS is an automatic admin interface which can be plugged into your applicati
 
 Check out the example application with mongo and postgres models here: https://admin-bro-example-app-staging.herokuapp.com/admin
 
-Or visit [AdminJS](https://github.com/SoftwareBrothers/admin-bro) github page.
+Or visit [AdminJS](https://github.com/SoftwareBrothers/adminjs) github page.
 
 ## Usage
 
+To see example usage visit the [examples](https://github.com/SoftwareBrothers/adminjs-expressjs/tree/master/examples) directory in this repository.
 
 ## License
 
-AdminJS is Copyright © 2020 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
+AdminJS is Copyright © 2021 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
 
 ## About SoftwareBrothers.co
 
