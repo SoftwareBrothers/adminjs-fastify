@@ -34,14 +34,14 @@ import Options = FastifySessionPlugin.Options;
  *   password: 'password',
  * }
  *
- * AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+ * AdminJSFastify.buildAuthenticatedRouter(adminJs, {
  *   authenticate: async (email, password) => {
  *     if (ADMIN.password === password && ADMIN.email === email) {
  *       return ADMIN
  *     }
  *     return null
  *   },
- *   cookieName: 'adminbro',
+ *   cookieName: 'adminjs',
  *   cookiePassword: 'somePassword',
  * }, [router])
  */

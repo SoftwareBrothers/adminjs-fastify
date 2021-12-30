@@ -29,7 +29,7 @@ export const buildRouter = (
   admin: AdminJS,
   fastifyApp: FastifyInstance
 ): void => {
-  if (admin?.constructor?.name !== 'AdminBro') {
+  if (admin?.constructor?.name !== 'AdminJS') {
     throw new WrongArgumentError(INVALID_ADMIN_BRO_INSTANCE);
   }
   fastifyApp.register(fastifyMultipart, { attachFieldsToBody: true });
