@@ -12,8 +12,7 @@
     "dev": "tsc --watch",
     "test": "jest",
     "lint": "eslint './src/**/*'",
-    "check:all": "yarn lint && yarn build && yarn test",
-    "prepare": "husky install"
+    "check:all": "yarn lint && yarn build && yarn test"
   },
   "peerDependencies": {
     "adminjs": "^5.3.3"
@@ -29,10 +28,8 @@
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
     "jest": "^26.6.1",
-    "prettier": "^2.1.2",
     "semantic-release": "^17.2.2",
     "semantic-release-slack-bot": "^1.6.2",
     "ts-jest": "^26.4.3",

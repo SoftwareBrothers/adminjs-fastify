@@ -3,7 +3,6 @@ module.exports = {
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
     'plugin:react/recommended',
   ],
   parserOptions: {
@@ -14,8 +13,8 @@ module.exports = {
     },
   },
   rules: {
-    'prettier/prettier': 'error',
     'react/prop-types': 'off',
+    'linebreak-style': 'off',
   },
   ignorePatterns: ['node_modules', 'lib'],
   settings: {
