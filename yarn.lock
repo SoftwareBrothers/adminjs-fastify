@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adminjs/design-system@^2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-2.0.2.tgz#6c77a902dff7483e0376d6b9acd5aeb062518e72"
-  integrity sha512-GjI5RL3AyQR36NPPAHeIuRb+W1tk62RPYZ6KOs8F9A6CrDRg/lMq2iqHXbnPweyzxC3AZMISdTVZHnkmSG5tiQ==
+"@adminjs/design-system@^2.1.0":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-2.1.2.tgz#0a1928f9730b3d6e71ae880a274a71364766f7fe"
+  integrity sha512-xCyHE4ovYNRxMU861K8t34grI7L5mCzFu9ouDTX2tnXgQS9Kg6E7DjqbEOexP33Bf3aARo8vn3fZjbGYYXNdoQ==
   dependencies:
     "@carbon/icons-react" "^10.14.0"
     date-fns "2.15.0"
@@ -1711,10 +1711,10 @@
     "@babel/helper-module-imports" "^7.10.4"
     "@rollup/pluginutils" "^3.1.0"
 
-"@rollup/plugin-commonjs@^15.1.0":
-  version "15.1.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-15.1.0.tgz#1e7d076c4f1b2abf7e65248570e555defc37c238"
-  integrity sha512-xCQqz4z/o0h2syQ7d9LskIMvBSH4PX5PjYdpSSvgS+pQik3WahkQVNWg3D8XJeYjZoVWnIUQYDghuEMRGrmQYQ==
+"@rollup/plugin-commonjs@^21.0.1":
+  version "21.0.2"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-21.0.2.tgz#0b9c539aa1837c94abfaf87945838b0fc8564891"
+  integrity sha512-d/OmjaLVO4j/aQX69bwpWPpbvI3TJkQuxoAk7BH8ew1PyoMBLTOuvJTjzG8oEoW7drIIqB0KCJtfFLu/2GClWg==
   dependencies:
     "@rollup/pluginutils" "^3.1.0"
     commondir "^1.0.1"
@@ -2139,6 +2139,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/mime-types@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@types/mime-types/-/mime-types-2.1.1.tgz#d9ba43490fa3a3df958759adf69396c3532cf2c1"
+  integrity sha512-vXOTGVSLR2jMw440moWTC7H19iUyLtP3Z1YTj7cSsubOICinjMxFeb/V57v9QdyyPGbbWolUFSSmSiRSn94tFw==
+
 "@types/minimist@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.0.tgz#69a23a3ad29caf0097f06eda59b361ee2f0639f6"
@@ -2360,11 +2365,11 @@ acorn@^7.1.1, acorn@^7.4.0:
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
 adminjs@^5.3.3:
-  version "5.3.3"
-  resolved "https://registry.yarnpkg.com/adminjs/-/adminjs-5.3.3.tgz#b015d37b23245fe933715d6552ebd762a4f75431"
-  integrity sha512-GEScb5f0z8eA1hCYqs/PgIbjJ1IbtSVS7cFaML0BjYMnC4QpO+1iP1MWn4MnA8A7pMxfbUzDpzFlAaTmnDWObQ==
+  version "5.7.2"
+  resolved "https://registry.yarnpkg.com/adminjs/-/adminjs-5.7.2.tgz#426c42a669c5f3b8b0268a871acd739a3ecf8d6d"
+  integrity sha512-C9ErbnQlbJwz7PyYAfE4S8C6STsAV//SKirZnqKfjfX5Tq/aUuOgXVD9cALXktokXNJEi8PYKywmqcnAn0ckqg==
   dependencies:
-    "@adminjs/design-system" "^2.0.0"
+    "@adminjs/design-system" "^2.1.0"
     "@babel/core" "^7.10.2"
     "@babel/parser" "^7.10.2"
     "@babel/plugin-transform-runtime" "^7.10.1"
@@ -2374,7 +2379,7 @@ adminjs@^5.3.3:
     "@babel/preset-typescript" "^7.10.1"
     "@babel/register" "^7.10.1"
     "@rollup/plugin-babel" "^5.2.1"
-    "@rollup/plugin-commonjs" "^15.1.0"
+    "@rollup/plugin-commonjs" "^21.0.1"
     "@rollup/plugin-json" "^4.1.0"
     "@rollup/plugin-node-resolve" "^9.0.0"
     "@rollup/plugin-replace" "^2.3.3"
@@ -2388,9 +2393,10 @@ adminjs@^5.3.3:
     lodash "^4.17.21"
     ora "^5.4.1"
     prop-types "^15.7.2"
-    react "=16.13.1"
+    punycode "^2.1.1"
+    react "^16.13.1"
     react-beautiful-dnd "^13.0.0"
-    react-dom "=16.13.1"
+    react-dom "^16.13.1"
     react-i18next "^11.14.3"
     react-is "=16.13.1"
     react-redux "=7.2.0"
@@ -2402,6 +2408,7 @@ adminjs@^5.3.3:
     rollup-plugin-terser "^6.1.0"
     slash "^3.0.0"
     styled-components "^5.1.0"
+    uuid "^8.3.2"
 
 agent-base@4, agent-base@^4.3.0:
   version "4.3.0"
@@ -7277,12 +7284,24 @@ mime-db@1.44.0:
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.44.0.tgz#fa11c5eb0aca1334b4233cb4d52f10c5a6272f92"
   integrity sha512-/NOTfLrsPBVeH7YtFPgsVWveuL+4SjjYxaQ1xtM1KMFj7HdxlBlxeyNLzhyJVx7r4rZGJAZ/6lkKCitSc/Nmpg==
 
+mime-db@1.51.0:
+  version "1.51.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.51.0.tgz#d9ff62451859b18342d960850dc3cfb77e63fb0c"
+  integrity sha512-5y8A56jg7XVQx2mbv1lu49NR4dokRnhZYTtL+KGfaa27uq4pSTXkwQkFJl4pkRMyNFz/EtYDSkiiEHx3F7UN6g==
+
 mime-types@^2.1.12, mime-types@~2.1.19:
   version "2.1.27"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.27.tgz#47949f98e279ea53119f5722e0f34e529bec009f"
   integrity sha512-JIhqnCasI9yD+SsmkquHBxTSEuZdQX5BuQnS2Vc7puQQQ+8yiP5AY5uWhpdv4YL4VM5c6iliiYWPgJ/nJQLp7w==
   dependencies:
     mime-db "1.44.0"
+
+mime-types@^2.1.34:
+  version "2.1.34"
+  resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.34.tgz#5a712f9ec1503511a945803640fafe09d3793c24"
+  integrity sha512-6cP692WwGIs9XXdOO4++N+7qjqv0rqxxVvJ3VHPh/Sc9mVZcQP+ZGhkKiTvWMQRr2tbHkJP/Yn7Y0npb3ZBs4A==
+  dependencies:
+    mime-db "1.51.0"
 
 mime@^2.4.3:
   version "2.4.6"
@@ -8667,10 +8686,10 @@ react-datepicker@^3.1.3:
     react-onclickoutside "^6.10.0"
     react-popper "^1.3.8"
 
-react-dom@=16.13.1:
-  version "16.13.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
-  integrity sha512-81PIMmVLnCNLO/fFOQxdQkvEq/+Hfpv24XNJfpyZhTRfO0QcmQIF/PgCa1zCOj2w1hrn12MFLyaJ/G0+Mxtfag==
+react-dom@^16.13.1:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
+  integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -8802,10 +8821,10 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@=16.13.1:
-  version "16.13.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
-  integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
+react@^16.13.1:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -10774,6 +10793,11 @@ uuid@^8.3.0:
   version "8.3.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.1.tgz#2ba2e6ca000da60fce5a196954ab241131e05a31"
   integrity sha512-FOmRr+FmWEIG8uhZv6C2bTgEVXsHk08kE7mPlrBbEe+c3r9pjceVPgupIfNIhc4yx55H69OXANrUaSuu9eInKg==
+
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 v8-compile-cache@^2.0.3:
   version "2.2.0"
