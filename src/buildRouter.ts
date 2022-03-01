@@ -6,6 +6,7 @@ import { FastifyInstance } from 'fastify';
 import { RouteHandlerMethod } from 'fastify/types/route';
 import { fromPairs } from 'lodash';
 import * as fs from 'fs';
+import * as mime from 'mime-types';
 
 import fastifyMultipart from 'fastify-multipart';
 
@@ -96,6 +97,7 @@ export const buildRouter = (
     fastifyApp.get(
       `${admin.options.rootPath}${asset.path}`,
       async (req, reply) => {
+        reply.header('content-type', mime.lookup(asset.src));
         reply.send(fs.createReadStream(path.resolve(asset.src)));
       }
     );

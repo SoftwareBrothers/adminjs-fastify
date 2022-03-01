@@ -21,6 +21,7 @@
     "@semantic-release/git": "^9.0.0",
     "@types/busboy": "^0.2.3",
     "@types/jest": "^26.0.15",
+    "@types/mime-types": "^2.1.1",
     "@types/node": "^15.12.2",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
@@ -42,6 +43,7 @@
     "fastify-formbody": "^5.0.0",
     "fastify-multipart": "^4.0.6",
     "fastify-session": "^5.2.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "mime-types": "^2.1.34"
   }
 }
