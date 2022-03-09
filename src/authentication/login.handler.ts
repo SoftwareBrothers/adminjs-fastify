@@ -44,6 +44,7 @@ export const withLogin = (
         action: admin.options.loginPath,
         errorMessage: 'invalidCredentials',
       });
+      reply.type('text/html');
       reply.send(login);
     }
   });
