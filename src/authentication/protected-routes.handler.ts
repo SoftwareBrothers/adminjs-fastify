@@ -8,9 +8,10 @@ export const withProtectedRoutesHandler = (
   const { rootPath } = admin.options;
 
   fastifyApp.addHook('preHandler', async (request, reply) => {
-    if (AdminRouter.assets.find(asset => request.url.match(asset.path))) {
+    if (AdminRouter.assets.find((asset) => request.url.match(asset.path))) {
       return;
     } else if (
+      !request.url.startsWith(rootPath) ||
       request.session.adminUser ||
       // these routes doesn't need authentication
       request.url.startsWith(admin.options.loginPath) ||
