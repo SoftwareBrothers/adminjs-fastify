@@ -8,7 +8,7 @@ import { fromPairs } from 'lodash';
 import * as fs from 'fs';
 import * as mime from 'mime-types';
 
-import fastifyMultipart from 'fastify-multipart';
+import fastifyMultipart from '@fastify/multipart';
 
 const INVALID_ADMIN_BRO_INSTANCE =
   'You have to pass an instance of AdminJS to the buildRouter() function';

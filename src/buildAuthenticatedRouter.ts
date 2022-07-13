@@ -5,9 +5,9 @@ import { AuthenticationOptions } from './types';
 import { withLogin } from './authentication/login.handler';
 import { withProtectedRoutesHandler } from './authentication/protected-routes.handler';
 import { FastifyInstance } from 'fastify';
-import fastifyCookie from 'fastify-cookie';
+import fastifyCookie from '@fastify/cookie';
 import fastifySession from 'fastify-session';
-import fastifyFormBody from 'fastify-formbody';
+import fastifyFormBody from '@fastify/formbody';
 import FastifySessionPlugin from 'fastify-session';
 import Options = FastifySessionPlugin.Options;
 /**
