@@ -58,7 +58,7 @@ import { buildAuthenticatedRouter } from './buildAuthenticatedRouter';
  * {@link module:@adminjs/fastify.buildAuthenticatedRouter} method.
  *
  * Note! To use authentication in production environment, there is a need to configure
- * fastify-session for production build. It can be achieved by passing options to
+ * @fastify/session for production build. It can be achieved by passing options to
  * `sessionOptions` parameter.
  *
  * ## Adding custom authentication

@@ -4,11 +4,12 @@ import AdminJS from 'adminjs';
 import { createUserResource } from './resources/user/user.resource';
 import { FastifyInstance } from 'fastify';
 
-const setupAdmin = async (app: FastifyInstance): Promise<void> => {
+const setupAdmin = async (app: FastifyInstance): Promise<AdminJS> => {
   AdminJS.registerAdapter(MongooseAdapter);
+
   const admin = new AdminJS({
     rootPath: '/admin',
-    resources: [createUserResource()],
+    resources: [],
   });
 
   await AdminJSFastify.buildRouter(
@@ -24,6 +25,8 @@ const setupAdmin = async (app: FastifyInstance): Promise<void> => {
     // },
     app
   );
+
+  return admin
 };
 
 export default setupAdmin;

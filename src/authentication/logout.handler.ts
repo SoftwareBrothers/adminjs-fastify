@@ -14,8 +14,12 @@ export const withLogout = (
   const logoutPath = getLogoutPath(admin);
 
   fastifyApp.get(logoutPath, async (request, reply) => {
-    request.destroySession(() => {
+    if (request.session) {
+      request.session.destroy(() => {
+        reply.redirect(admin.options.loginPath);
+      })
+    } else {
       reply.redirect(admin.options.loginPath);
-    });
+    }
   });
 };
