@@ -5,12 +5,11 @@ import { log } from './logger';
 import { FastifyInstance } from 'fastify';
 import { RouteHandlerMethod } from 'fastify/types/route';
 import { fromPairs } from 'lodash';
-import * as fs from 'fs';
+import { readFile } from 'fs/promises';
 import * as mime from 'mime-types';
-
 import fastifyMultipart from '@fastify/multipart';
 
-const INVALID_ADMIN_BRO_INSTANCE =
+const INVALID_ADMIN_JS_INSTANCE =
   'You have to pass an instance of AdminJS to the buildRouter() function';
 
 const getFile = (fileField?: {
@@ -26,20 +25,22 @@ const getFile = (fileField?: {
   return file;
 };
 
-export const buildRouter = (
+export const buildRouter = async (
   admin: AdminJS,
   fastifyApp: FastifyInstance
-): void => {
+): Promise<void> => {
+  const { assets } = AdminRouter;
   if (admin?.constructor?.name !== 'AdminJS') {
-    throw new WrongArgumentError(INVALID_ADMIN_BRO_INSTANCE);
+    throw new WrongArgumentError(INVALID_ADMIN_JS_INSTANCE);
   }
-  fastifyApp.register(fastifyMultipart, { attachFieldsToBody: true });
+
+  await fastifyApp.register(fastifyMultipart, { attachFieldsToBody: true });
 
   admin.initialize().then(() => {
     log.debug('AdminJS: bundle ready');
   });
 
-  const { routes, assets } = AdminRouter;
+  const { routes } = AdminRouter;
 
   routes.forEach(route => {
     // we have to change routes defined in AdminJS from {recordId} to :recordId
@@ -96,9 +97,14 @@ export const buildRouter = (
   assets.forEach(asset => {
     fastifyApp.get(
       `${admin.options.rootPath}${asset.path}`,
-      async (req, reply) => {
-        reply.header('content-type', mime.lookup(asset.src));
-        reply.send(fs.createReadStream(path.resolve(asset.src)));
+      async (_req, reply) => {
+        const mimeType = mime.lookup(asset.src)
+        const file = await readFile(path.resolve(asset.src))
+
+        if (mimeType) {
+          return reply.type(mimeType).send(file);
+        }
+        return reply.send(file);
       }
     );
   });

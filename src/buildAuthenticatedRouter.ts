@@ -6,10 +6,9 @@ import { withLogin } from './authentication/login.handler';
 import { withProtectedRoutesHandler } from './authentication/protected-routes.handler';
 import { FastifyInstance } from 'fastify';
 import fastifyCookie from '@fastify/cookie';
-import fastifySession from 'fastify-session';
 import fastifyFormBody from '@fastify/formbody';
-import FastifySessionPlugin from 'fastify-session';
-import Options = FastifySessionPlugin.Options;
+import FastifySessionPlugin from '@fastify/session';
+
 /**
  * @typedef {Function} Authenticate
  * @memberof module:@adminjs/fastify
@@ -45,25 +44,24 @@ import Options = FastifySessionPlugin.Options;
  *   cookiePassword: 'somePassword',
  * }, [router])
  */
-export const buildAuthenticatedRouter = (
+export const buildAuthenticatedRouter = async (
   admin: AdminJS,
   auth: AuthenticationOptions,
   fastifyApp: FastifyInstance,
-  sessionOptions?: Options
-): void => {
-  fastifyApp.register(fastifyCookie);
-  fastifyApp.register(fastifySession, {
+  sessionOptions?: FastifySessionPlugin.Options
+): Promise<void> => {
+  await fastifyApp.register(fastifyCookie, {
+    secret: auth.cookiePassword,
+  });
+  await fastifyApp.register(FastifySessionPlugin, {
     secret: auth.cookiePassword,
     cookieName: auth.cookieName ?? 'adminjs',
-    cookie: {
-      secure: false,
-    },
+    cookie: sessionOptions?.cookie ?? { secure: false },
     ...(sessionOptions ?? {}),
   });
+  await fastifyApp.register(fastifyFormBody);
 
-  fastifyApp.register(fastifyFormBody);
-
-  buildRouter(admin, fastifyApp);
+  await buildRouter(admin, fastifyApp);
   withProtectedRoutesHandler(fastifyApp, admin);
   withLogin(fastifyApp, admin, auth);
   withLogout(fastifyApp, admin);

@@ -1,10 +1,10 @@
-import fastify from 'fastify';
+import Fastify from 'fastify';
 import setupAdmin from './admin/admin';
 import mongoose from 'mongoose';
-import fastifyStatic from 'fastify-static';
+import fastifyStatic from '@fastify/static';
 import path from 'path';
 
-const app = fastify();
+const app = Fastify();
 const port = 3000;
 
 const run = async (): Promise<void> => {
@@ -16,13 +16,16 @@ const run = async (): Promise<void> => {
         useUnifiedTopology: true,
       }
     );
-    app.register(fastifyStatic, {
+    await app.register(fastifyStatic, {
       root: path.join(__dirname, '../public'),
       prefix: '/public/',
     });
 
-    await setupAdmin(app);
-    await app.listen(port);
+    const admin = await setupAdmin(app);
+    app.listen({ port }, (err, addr) => {
+      if (err) { console.log(err) }
+      else console.log(`App started on ${addr}${admin.options.rootPath}`)
+    });
   } catch (err) {
     app.log.error(err);
     process.exit(1);

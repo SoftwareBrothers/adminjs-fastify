@@ -32,7 +32,7 @@ export const withLogin = (
     };
     const adminUser = await auth.authenticate(email, password);
     if (adminUser) {
-      req.session.adminUser = adminUser;
+      req.session.set('adminUser', adminUser);
 
       if (req.session.redirectTo) {
         reply.redirect(302, req.session.redirectTo);

@@ -4,17 +4,21 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "ts-node src/server",
     "lint": "eslint src --ext ts"
   },
   "dependencies": {
     "@adminjs/design-system": "^2.0.2",
-    "@adminjs/mongoose": "^2.0.0",
     "@adminjs/fastify": "../",
-    "fastify-static": "^4.2.2",
+    "@adminjs/mongoose": "^2.0.0",
+    "@fastify/static": "^6.5.0",
+    "fastify": "^4.3.0",
     "mongoose": "^5.12.14",
     "nodemon": "^2.0.6",
-    "ts-node": "^9.0.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.5",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {}
 }

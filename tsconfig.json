@@ -19,7 +19,7 @@
     "skipLibCheck": true,
     "paths": {
       "adminjs": [
-        "admin-bro"
+        "adminjs"
       ]
     }
   },
