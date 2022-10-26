@@ -81,7 +81,7 @@ export const buildRouter = async (
         reply.type('text/html');
       }
       if (html) {
-        reply.send(html);
+        return reply.send(html);
       }
     };
 
