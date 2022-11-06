@@ -30,7 +30,7 @@ export const withLogin = (
       email: string;
       password: string;
     };
-    const adminUser = await auth.authenticate(email, password);
+    const adminUser = await auth.authenticate(email, password, req);
     if (adminUser) {
       req.session.set('adminUser', adminUser);
 
