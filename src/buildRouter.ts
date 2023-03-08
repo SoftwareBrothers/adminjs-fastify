@@ -1,13 +1,13 @@
-import AdminJS, { Router as AdminRouter } from 'adminjs';
-import path from 'path';
-import { WrongArgumentError } from './errors';
-import { log } from './logger';
-import { FastifyInstance } from 'fastify';
-import { RouteHandlerMethod } from 'fastify/types/route';
-import { fromPairs } from 'lodash';
-import { readFile } from 'fs/promises';
-import * as mime from 'mime-types';
 import fastifyMultipart from '@fastify/multipart';
+import AdminJS, { Router as AdminRouter } from 'adminjs';
+import { FastifyInstance } from 'fastify';
+import { RouteHandlerMethod } from 'fastify/types/route.js';
+import { readFile } from 'fs/promises';
+import { fromPairs } from 'lodash';
+import * as mime from 'mime-types';
+import path from 'path';
+import { WrongArgumentError } from './errors.js';
+import { log } from './logger.js';
 
 const INVALID_ADMIN_JS_INSTANCE =
   'You have to pass an instance of AdminJS to the buildRouter() function';
