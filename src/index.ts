@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-// import { buildAuthenticatedRouter } from './buildAuthenticatedRouter';
 import { buildAuthenticatedRouter } from './buildAuthenticatedRouter.js';
 import { buildRouter } from './buildRouter.js';
 
