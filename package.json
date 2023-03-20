@@ -5,7 +5,7 @@
   "exports": {
     ".": {
       "import": "./lib/index.js",
-      "types": "./lib/index.d.ts"
+      "types": "./types/index.d.ts"
     }
   },
   "private": false,
