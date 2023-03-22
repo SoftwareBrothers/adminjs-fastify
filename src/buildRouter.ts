@@ -3,7 +3,7 @@ import AdminJS, { Router as AdminRouter } from 'adminjs';
 import { FastifyInstance } from 'fastify';
 import { RouteHandlerMethod } from 'fastify/types/route.js';
 import { readFile } from 'fs/promises';
-import { fromPairs } from 'lodash';
+import fromPairs from 'lodash/fromPairs.js';
 import * as mime from 'mime-types';
 import path from 'path';
 
