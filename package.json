@@ -28,6 +28,7 @@
     "@types/node": "^18.15.3",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
+    "@types/jest": "^26.0.15",
     "adminjs": "^7.0.0-beta-v7.1",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
