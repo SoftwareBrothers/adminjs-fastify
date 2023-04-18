@@ -10,6 +10,8 @@ export const withProtectedRoutesHandler = (
   fastifyApp.addHook('preHandler', async (request, reply) => {    
     if (AdminRouter.assets.find((asset) => request.url.match(asset.path))) {
       return;
+    } else if (AdminRouter.routes.find((r) => r.action === 'bundleComponents')) {
+      return;
     } else if (
       !request.url.startsWith(rootPath) ||
       request.session.get('adminUser') ||

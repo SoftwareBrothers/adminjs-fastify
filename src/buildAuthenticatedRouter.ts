@@ -1,13 +1,14 @@
-import AdminJS from 'adminjs';
-import { withLogout } from './authentication/logout.handler';
-import { buildRouter } from './buildRouter';
-import { AuthenticationOptions } from './types';
-import { withLogin } from './authentication/login.handler';
-import { withProtectedRoutesHandler } from './authentication/protected-routes.handler';
-import { FastifyInstance } from 'fastify';
 import fastifyCookie from '@fastify/cookie';
 import fastifyFormBody from '@fastify/formbody';
 import FastifySessionPlugin from '@fastify/session';
+import AdminJS from 'adminjs';
+import { FastifyInstance } from 'fastify';
+
+import { withLogin } from './authentication/login.handler.js';
+import { withLogout } from './authentication/logout.handler.js';
+import { withProtectedRoutesHandler } from './authentication/protected-routes.handler.js';
+import { buildRouter } from './buildRouter.js';
+import { AuthenticationOptions } from './types.js';
 
 /**
  * @typedef {Function} Authenticate
@@ -48,7 +49,7 @@ export const buildAuthenticatedRouter = async (
   admin: AdminJS,
   auth: AuthenticationOptions,
   fastifyApp: FastifyInstance,
-  sessionOptions?: FastifySessionPlugin.Options
+  sessionOptions?: FastifySessionPlugin.FastifySessionOptions
 ): Promise<void> => {
   await fastifyApp.register(fastifyCookie, {
     secret: auth.cookiePassword,

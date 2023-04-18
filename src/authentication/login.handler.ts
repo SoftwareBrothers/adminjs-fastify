@@ -1,6 +1,7 @@
 import AdminJS from 'adminjs';
-import { AuthenticationOptions } from '../types';
 import { FastifyInstance } from 'fastify';
+
+import { AuthenticationOptions } from '../types.js';
 
 const getLoginPath = (admin: AdminJS): string => {
   const { loginPath } = admin.options;

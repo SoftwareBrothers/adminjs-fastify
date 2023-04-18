@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
-// import { buildAuthenticatedRouter } from './buildAuthenticatedRouter';
-import { buildRouter } from './buildRouter';
-import { buildAuthenticatedRouter } from './buildAuthenticatedRouter';
+import { buildAuthenticatedRouter } from './buildAuthenticatedRouter.js';
+import { buildRouter } from './buildRouter.js';
 
 /**
  * @module @adminjs/fastify
@@ -72,10 +71,18 @@ import { buildAuthenticatedRouter } from './buildAuthenticatedRouter';
  * @static
  * @memberof module:@adminjs/fastify
  */
-export const name = 'AdminJSFastify';
+const name = 'AdminJSFastify';
 
-module.exports = { name, buildRouter, buildAuthenticatedRouter };
+export type FastifyPlugin = {
+  name: string;
+  buildAuthenticatedRouter: typeof buildAuthenticatedRouter;
+  buildRouter: typeof buildRouter;
+};
 
-export default { name, buildRouter, buildAuthenticatedRouter };
+const plugin: FastifyPlugin = { name, buildAuthenticatedRouter, buildRouter };
 
-export { AuthenticationOptions } from './types';
+export { AuthenticationOptions } from './types.js';
+export { name, buildRouter, buildAuthenticatedRouter };
+
+export default plugin;
+
