@@ -44,10 +44,12 @@ const getFile = async (fileField) => {
     return null;
 };
 
+//@ts-ignore
 Array.prototype.asyncMap = async function (callback) {
     const result = [];
     for (let index = 0; index < this.length; index++) {
-        result.push(await callback(this[index], index, this));
+      //@ts-ignore
+      result.push(await callback(this[index], index, this));
     }
     return result;
 };
@@ -86,9 +88,10 @@ export const buildRouter = async (
         { value: string; file?: File }
       >;
       const fields = fromPairs(
-        await Object.keys((body ?? {}) as Record<string, unknown>).map(async key => [
+        //@ts-ignore
+        await Object.keys((body ?? {}) as Record<string, unknown>).asyncMap(async key => [
           key,
-          await getFile(body[key] as any) ?? body[key].value,
+          (await getFile(body[key] as any)) ?? body[key].value,
         ])
       );
       const html = await controller[route.action](
