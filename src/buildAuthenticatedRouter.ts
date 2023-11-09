@@ -6,9 +6,16 @@ import { FastifyInstance } from 'fastify';
 
 import { withLogin } from './authentication/login.handler.js';
 import { withLogout } from './authentication/logout.handler.js';
+import { withRefresh } from './authentication/refresh.handler.js';
 import { withProtectedRoutesHandler } from './authentication/protected-routes.handler.js';
 import { buildRouter } from './buildRouter.js';
 import { AuthenticationOptions } from './types.js';
+import { WrongArgumentError } from './errors.js';
+
+const MISSING_AUTH_CONFIG_ERROR =
+  'You must configure either "authenticate" method or assign an auth "provider"';
+const INVALID_AUTH_CONFIG_ERROR =
+  'You cannot configure both "authenticate" and "provider". "authenticate" will be removed in next major release.';
 
 /**
  * @typedef {Function} Authenticate
@@ -51,6 +58,21 @@ export const buildAuthenticatedRouter = async (
   fastifyApp: FastifyInstance,
   sessionOptions?: FastifySessionPlugin.FastifySessionOptions
 ): Promise<void> => {
+  if (!auth.authenticate && !auth.provider) {
+    throw new WrongArgumentError(MISSING_AUTH_CONFIG_ERROR);
+  }
+
+  if (auth.authenticate && auth.provider) {
+    throw new WrongArgumentError(INVALID_AUTH_CONFIG_ERROR);
+  }
+
+  if (auth.provider) {
+    admin.options.env = {
+      ...admin.options.env,
+      ...auth.provider.getUiProps(),
+    };
+  }
+
   await fastifyApp.register(fastifyCookie, {
     secret: auth.cookiePassword,
   });
@@ -65,5 +87,6 @@ export const buildAuthenticatedRouter = async (
   await buildRouter(admin, fastifyApp);
   withProtectedRoutesHandler(fastifyApp, admin);
   withLogin(fastifyApp, admin, auth);
-  withLogout(fastifyApp, admin);
+  withLogout(fastifyApp, admin, auth);
+  withRefresh(fastifyApp, admin, auth);
 };
