@@ -1,6 +1,6 @@
 {
   "name": "@adminjs/fastify",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "type": "module",
   "exports": {
     ".": {
