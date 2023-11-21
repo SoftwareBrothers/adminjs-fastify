@@ -7,23 +7,51 @@ import fromPairs from 'lodash/fromPairs.js';
 import * as mime from 'mime-types';
 import path from 'path';
 
+import os from 'os';
+import fs from 'fs';
+
+
 import { WrongArgumentError } from './errors.js';
 import { log } from './logger.js';
 
 const INVALID_ADMIN_JS_INSTANCE =
   'You have to pass an instance of AdminJS to the buildRouter() function';
 
-const getFile = (fileField?: {
-  fieldname: string;
-  filename: string;
-  file: Record<string, unknown>;
-}) => {
-  if (!fileField?.file) {
+async function writeFile(path, data) {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(path, data, (err) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve(null);
+            }
+        });
+    });
+}
+
+const getFile = async (fileField) => {
+    if (fileField.type === 'file') {
+        fileField.name = fileField.filename;
+        const buffer = await fileField.toBuffer();
+        const tmpFilePath = path.join(os.tmpdir(), fileField.filename);
+        await writeFile(tmpFilePath, buffer);
+        return {
+            name: fileField.filename,
+            path: tmpFilePath
+        };
+    }
     return null;
-  }
-  const { file, filename } = fileField;
-  file.name = filename;
-  return file;
+};
+
+//@ts-ignore
+Array.prototype.asyncMap = async function (callback) {
+    const result = [];
+    for (let index = 0; index < this.length; index++) {
+      //@ts-ignore
+      result.push(await callback(this[index], index, this));
+    }
+    return result;
 };
 
 export const buildRouter = async (
@@ -60,9 +88,10 @@ export const buildRouter = async (
         { value: string; file?: File }
       >;
       const fields = fromPairs(
-        Object.keys((body ?? {}) as Record<string, unknown>).map(key => [
+        //@ts-ignore
+        await Object.keys((body ?? {}) as Record<string, unknown>).asyncMap(async key => [
           key,
-          getFile(body[key] as any) ?? body[key].value,
+          (await getFile(body[key] as any)) ?? body[key].value,
         ])
       );
       const html = await controller[route.action](
