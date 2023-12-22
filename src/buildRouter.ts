@@ -62,7 +62,7 @@ export const buildRouter = async (
       const fields = fromPairs(
         Object.keys((body ?? {}) as Record<string, unknown>).map(key => [
           key,
-          getFile(body[key] as any) ?? body[key].value,
+          getFile(body[key] as any) ?? body[key].value ?? body[key],
         ])
       );
       const html = await controller[route.action](
