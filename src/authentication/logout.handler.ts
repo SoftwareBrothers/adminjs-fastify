@@ -20,13 +20,10 @@ export const withLogout = (
     if (provider) {
       await provider.handleLogout({ request, reply });
     }
-  
+
     if (request.session) {
-      request.session.destroy(() => {
-        reply.redirect(admin.options.loginPath);
-      })
-    } else {
-      reply.redirect(admin.options.loginPath);
+      await request.session.destroy();
     }
+    return reply.redirect(admin.options.loginPath);
   });
 };

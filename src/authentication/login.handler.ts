@@ -30,7 +30,7 @@ export const withLogin = (
       ...providerProps,
     });
     reply.type('text/html');
-    reply.send(login);
+    return reply.send(login);
   });
 
   fastifyInstance.post(loginPath, async (req, reply) => {
@@ -60,9 +60,9 @@ export const withLogin = (
       req.session.set('adminUser', adminUser);
 
       if (req.session.redirectTo) {
-        reply.redirect(302, req.session.redirectTo);
+        return reply.redirect(302, req.session.redirectTo);
       } else {
-        reply.redirect(302, rootPath);
+        return reply.redirect(302, rootPath);
       }
     } else {
       const login = await admin.renderLogin({
@@ -71,7 +71,7 @@ export const withLogin = (
         ...providerProps,
       });
       reply.type('text/html');
-      reply.send(login);
+      return reply.send(login);
     }
   });
 };

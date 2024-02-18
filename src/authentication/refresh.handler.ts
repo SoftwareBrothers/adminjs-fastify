@@ -54,8 +54,7 @@ export const withRefresh = (
     };
 
     request.session.set('adminUser', admin);
-    request.session.save(() => {
-      reply.send(admin);
-    });
+    await request.session.save();
+    return reply.send(admin);
   });
 };
