@@ -7,7 +7,7 @@ export const withProtectedRoutesHandler = (
 ): void => {
   const { rootPath } = admin.options;
 
-  fastifyApp.addHook('preHandler', async (request, reply) => {    
+  fastifyApp.addHook('preHandler', async (request, reply) => {
     const buildComponentRoute = AdminRouter.routes.find((r) => r.action === 'bundleComponents')?.path
     if (AdminRouter.assets.find((asset) => request.url.match(asset.path))) {
       return;
@@ -28,7 +28,7 @@ export const withProtectedRoutesHandler = (
         ? rootPath
         : redirectTo;
 
-      reply.redirect(admin.options.loginPath);
+      return reply.redirect(admin.options.loginPath);
     }
   });
 };
