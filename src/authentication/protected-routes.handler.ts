@@ -7,9 +7,15 @@ export const withProtectedRoutesHandler = (
 ): void => {
   const { rootPath } = admin.options;
 
-  fastifyApp.addHook('preHandler', async (request, reply) => {
-    const buildComponentRoute = AdminRouter.routes.find((r) => r.action === 'bundleComponents')?.path
-    if (AdminRouter.assets.find((asset) => request.url.match(asset.path))) {
+  fastifyApp.addHook("preHandler", async (request, reply) => {
+    const buildComponentRoute = AdminRouter.routes.find(
+      (r) => r.action === "bundleComponents"
+    )?.path;
+    const assets = [
+      ...AdminRouter.assets.map((a) => a.path),
+      ...Object.values(admin.options?.assets ?? {}).flat(),
+    ];
+    if (assets.find((a) => request.url.match(a))) {
       return;
     } else if (buildComponentRoute && request.url.match(buildComponentRoute)) {
       return;
