@@ -1,23 +1,18 @@
-import fastifyMultipart from '@fastify/multipart';
-import AdminJS, { Router as AdminRouter } from 'adminjs';
-import { FastifyInstance } from 'fastify';
-import { RouteHandlerMethod } from 'fastify/types/route.js';
-import { readFile } from 'fs/promises';
-import fromPairs from 'lodash/fromPairs.js';
-import * as mime from 'mime-types';
-import path from 'path';
+import fastifyMultipart from "@fastify/multipart";
+import AdminJS, { Router as AdminRouter } from "adminjs";
+import { FastifyInstance } from "fastify";
+import { RouteHandlerMethod } from "fastify/types/route.js";
+import { readFile } from "fs/promises";
+import fromPairs from "lodash/fromPairs.js";
+import * as mime from "mime-types";
+import path from "path";
 
-import { WrongArgumentError } from './errors.js';
-import { log } from './logger.js';
+import { WrongArgumentError } from "./errors.js";
+import { log } from "./logger.js";
 
-const INVALID_ADMIN_JS_INSTANCE =
-  'You have to pass an instance of AdminJS to the buildRouter() function';
+const INVALID_ADMIN_JS_INSTANCE = "You have to pass an instance of AdminJS to the buildRouter() function";
 
-const getFile = (fileField?: {
-  fieldname: string;
-  filename: string;
-  file: Record<string, unknown>;
-}) => {
+const getFile = (fileField?: { fieldname: string; filename: string; file: Record<string, unknown> }) => {
   if (!fileField?.file) {
     return null;
   }
@@ -26,44 +21,32 @@ const getFile = (fileField?: {
   return file;
 };
 
-export const buildRouter = async (
-  admin: AdminJS,
-  fastifyApp: FastifyInstance
-): Promise<void> => {
+export const buildRouter = async (admin: AdminJS, fastifyApp: FastifyInstance): Promise<void> => {
   const { assets } = AdminRouter;
-  if (admin?.constructor?.name !== 'AdminJS') {
+  if (admin?.constructor?.name !== "AdminJS") {
     throw new WrongArgumentError(INVALID_ADMIN_JS_INSTANCE);
   }
 
-  await fastifyApp.register(fastifyMultipart, { attachFieldsToBody: true });
+  // await fastifyApp.register(fastifyMultipart, { attachFieldsToBody: true });
 
   admin.initialize().then(() => {
-    log.debug('AdminJS: bundle ready');
+    log.debug("AdminJS: bundle ready");
   });
 
   const { routes } = AdminRouter;
 
-  routes.forEach(route => {
+  routes.forEach((route) => {
     // we have to change routes defined in AdminJS from {recordId} to :recordId
-    const path = route.path.replace(/{/g, ':').replace(/}/g, '');
+    const path = route.path.replace(/{/g, ":").replace(/}/g, "");
 
     const handler: RouteHandlerMethod = async (request, reply) => {
-      const controller = new route.Controller(
-        { admin },
-        request.session?.adminUser
-      );
+      const controller = new route.Controller({ admin }, request.session?.adminUser);
       const { params, query } = request;
       const method = request.method.toLowerCase();
 
-      const body = request.body as Record<
-        string,
-        { value: string; file?: File }
-      >;
+      const body = request.body as Record<string, { value: string; file?: File }>;
       const fields = fromPairs(
-        Object.keys((body ?? {}) as Record<string, unknown>).map(key => [
-          key,
-          getFile(body[key] as any) ?? body[key].value ?? body[key],
-        ])
+        Object.keys((body ?? {}) as Record<string, unknown>).map((key) => [key, getFile(body[key] as any) ?? body[key].value ?? body[key]])
       );
       const html = await controller[route.action](
         {
@@ -78,35 +61,32 @@ export const buildRouter = async (
 
       if (route.contentType) {
         reply.type(route.contentType);
-      } else if (typeof html === 'string') {
-        reply.type('text/html');
+      } else if (typeof html === "string") {
+        reply.type("text/html");
       }
       if (html) {
         return reply.send(html);
       }
     };
 
-    if (route.method === 'GET') {
+    if (route.method === "GET") {
       fastifyApp.get(`${admin.options.rootPath}${path}`, handler);
     }
 
-    if (route.method === 'POST') {
+    if (route.method === "POST") {
       fastifyApp.post(`${admin.options.rootPath}${path}`, handler);
     }
   });
 
-  assets.forEach(asset => {
-    fastifyApp.get(
-      `${admin.options.rootPath}${asset.path}`,
-      async (_req, reply) => {
-        const mimeType = mime.lookup(asset.src)
-        const file = await readFile(path.resolve(asset.src))
+  assets.forEach((asset) => {
+    fastifyApp.get(`${admin.options.rootPath}${asset.path}`, async (_req, reply) => {
+      const mimeType = mime.lookup(asset.src);
+      const file = await readFile(path.resolve(asset.src));
 
-        if (mimeType) {
-          return reply.type(mimeType).send(file);
-        }
-        return reply.send(file);
+      if (mimeType) {
+        return reply.type(mimeType).send(file);
       }
-    );
+      return reply.send(file);
+    });
   });
 };
