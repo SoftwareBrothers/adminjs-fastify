@@ -1,4 +1,4 @@
-import AdminJS, { Router as AdminRouter } from 'adminjs';
+import AdminJS, { CurrentAdmin, Router as AdminRouter } from 'adminjs';
 import { FastifyInstance } from 'fastify';
 
 export const withProtectedRoutesHandler = (
@@ -11,11 +11,16 @@ export const withProtectedRoutesHandler = (
     const buildComponentRoute = AdminRouter.routes.find(
       (r) => r.action === "bundleComponents"
     )?.path;
+
+    let AdminOptionsAssets = admin.options?.assets ?? {};
+    if (typeof AdminOptionsAssets === 'function')
+      AdminOptionsAssets = await AdminOptionsAssets(request.session.get('adminUser') as CurrentAdmin);
     const assets = [
       ...AdminRouter.assets.map((a) => a.path),
-      ...Object.values(admin.options?.assets ?? {}).flat(),
+      ...Object.values(AdminOptionsAssets).flat(),
     ];
-    if (assets.find((a) => request.url.match(a))) {
+
+    if (assets.find((a) => typeof a === 'string' && request.url.match(a))) {
       return;
     } else if (buildComponentRoute && request.url.match(buildComponentRoute)) {
       return;
