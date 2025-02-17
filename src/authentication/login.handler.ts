@@ -60,9 +60,9 @@ export const withLogin = (
       req.session.set('adminUser', adminUser);
 
       if (req.session.redirectTo) {
-        return reply.redirect(302, req.session.redirectTo);
+        return reply.redirect(req.session.redirectTo);
       } else {
-        return reply.redirect(302, rootPath);
+        return reply.redirect(rootPath);
       }
     } else {
       const login = await admin.renderLogin({
